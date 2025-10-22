@@ -32,8 +32,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Tắt CSRF nếu dùng REST API
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/v1/users/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/users/**").permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/api/v1/users/ping").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()

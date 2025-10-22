@@ -40,6 +40,7 @@ public class JwtConfig {
             }
         };
     }
+
     private SecretKey getSecretKey() {
         byte[] keyBytes = Base64.from(jwtKey).decode();
         return new SecretKeySpec(keyBytes, 0, keyBytes.length, JWT_ALGORITHM.getName());

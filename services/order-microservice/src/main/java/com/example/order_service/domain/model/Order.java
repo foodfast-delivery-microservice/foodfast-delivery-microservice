@@ -83,11 +83,12 @@ public class Order {
 
     public void calculateTotals() {
         this.subtotal = orderItems.stream()
-                .map(OrderItem::getLineTotal)
+                .map(item -> item.getLineTotal() == null ? BigDecimal.ZERO : item.getLineTotal())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         this.grandTotal = subtotal.add(shippingFee).subtract(discount);
     }
+
 
     public boolean canBeCancelled() {
         return status == OrderStatus.PENDING || status == OrderStatus.CONFIRMED;
