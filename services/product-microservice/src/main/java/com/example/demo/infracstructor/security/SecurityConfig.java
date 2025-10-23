@@ -32,8 +32,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PATCH, "/api/v1/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/products/**").hasRole("ADMIN")
 
-                        // test rabbitmq
-                        .requestMatchers(HttpMethod.GET,"/test/rabbitMQ/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)));

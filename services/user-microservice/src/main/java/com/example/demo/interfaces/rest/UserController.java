@@ -52,18 +52,18 @@ public class UserController {
                 null);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
-//    @PatchMapping("/{id}/password")
-//    public ResponseEntity<ApiResponse<User>> changePassword(
-//            @PathVariable Long id,@RequestBody ChangePasswordRequest request) {
-//        User updated = changePasswordUseCase.execute(id, request);
-//        ApiResponse<User> result = new ApiResponse<>(
-//                HttpStatus.OK,
-//                "changed password",
-//                updated,
-//                null
-//        );
-//        return ResponseEntity.status(HttpStatus.OK).body(result);
-//    }
+    @PatchMapping("{id}")
+    public ResponseEntity<ApiResponse<User>> changePassword(
+            @PathVariable Long id,@RequestBody ChangePasswordRequest request) {
+        User updated = changePasswordUseCase.execute(id, request);
+        ApiResponse<User> result = new ApiResponse<>(
+                HttpStatus.OK,
+                "changed password",
+                updated,
+                null
+        );
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
 
     @GetMapping
     public ResponseEntity<ApiResponse<List<CreateUserResponse>>> getAllUsers(){
