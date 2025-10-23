@@ -20,4 +20,6 @@ public interface OutboxEventRepository extends JpaRepository<OutboxEvent, Long> 
                                              @Param("cutoffTime") LocalDateTime cutoffTime);
 
     void deleteByStatusAndCreatedAtBefore(EventStatus status, LocalDateTime cutoffTime);
+
+    List<OutboxEvent> findByStatusOrderByCreatedAtAsc(EventStatus status);
 }

@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
@@ -17,6 +19,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Slf4j
 public class Order {
 
     @Id
@@ -83,12 +86,11 @@ public class Order {
 
     public void calculateTotals() {
         this.subtotal = orderItems.stream()
-                .map(item -> item.getLineTotal() == null ? BigDecimal.ZERO : item.getLineTotal())
+                .map(OrderItem::getLineTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         this.grandTotal = subtotal.add(shippingFee).subtract(discount);
     }
-
 
     public boolean canBeCancelled() {
         return status == OrderStatus.PENDING || status == OrderStatus.CONFIRMED;
