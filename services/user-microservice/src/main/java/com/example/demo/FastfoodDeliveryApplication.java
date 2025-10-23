@@ -4,9 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FastbootDeliveryApplication {
+public class FastfoodDeliveryApplication {
 
-	public static void main(String[] args) {SpringApplication.run(FastbootDeliveryApplication.class, args);
+	public static void main(String[] args) {
+		SpringApplication.run(FastfoodDeliveryApplication.class, args);
 	}
 
 }

@@ -51,24 +51,6 @@ public class UpdateOrderStatusUseCase {
 
         return mapToOrderDetailResponse(order);
     }
-    // --- THÊM HÀM MỚI NÀY (dành cho Saga/nội bộ) ---
-    @Transactional
-    public void execute(Long orderId, OrderStatus newStatus) {
-        log.info("Updating order status for orderId: {} to {} via internal call", orderId, newStatus);
-
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new OrderNotFoundException("Order not found with id: " + orderId));
-
-        // Chúng ta vẫn nên validate logic chuyển trạng thái
-        validateStatusTransition(order.getStatus(), newStatus);
-
-        // Tái sử dụng logic update
-        updateOrderStatus(order, newStatus);
-        order = orderRepository.save(order);
-
-        // Tạo outbox event (với note mặc định)
-        createStatusChangeEvent(order, newStatus, "Saga: " + newStatus.name());
-    }
 
     private OrderStatus validateAndParseStatus(String status) {
         if (status == null || status.trim().isEmpty()) {
