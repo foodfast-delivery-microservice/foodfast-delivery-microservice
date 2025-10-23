@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
-public class AuthUseCaseconfig {
+public class AuthUseCaseConfig {
     private final UserRepository userRepository;
 
     @Bean
